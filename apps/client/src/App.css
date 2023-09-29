@@ -27,6 +27,12 @@ main header h1 {
   text-decoration: underline;
 }
 
+main header span {
+  font-family: monospace;
+  font-weight: 300;
+  font-size: 1.3rem;
+}
+
 main .new-task {
   margin: 5vh 0 !important;
 }
