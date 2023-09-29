@@ -93,8 +93,8 @@ function App() {
                     {tasks.length === 0 && (
                         <span className='empty-message'>No tienes tareas</span>
                     )}
-                    {tasks.map((task, key) => (
-                        <li key={key} id={task.id} className='task'>
+                    {tasks.map((task) => (
+                        <li key={task.id} id={task.id} className='task'>
                             <button onClick={() => {
                                 dispatch({
                                     task,
