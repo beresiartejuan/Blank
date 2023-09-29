@@ -1,21 +1,16 @@
 {
-  "private": true,
+  "name": "blank",
+  "version": "1.0.0",
+  "description": "",
+  "main": "apps/sync/index.js",
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "start": "node apps/sync/index.js",
+    "build": "npm run build --workspace client"
   },
-  "devDependencies": {
-    "eslint": "^8.48.0",
-    "prettier": "^3.0.3",
-    "tsconfig": "*",
-    "turbo": "latest"
-  },
-  "name": "Blank",
-  "packageManager": "npm@10.1.0",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "apps/*"
   ]
 }
