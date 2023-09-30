@@ -81,7 +81,7 @@ function App() {
         <main>
             <header>
                 <h1># Blank</h1>
-                <span>Simple, sencillo y útil</span>
+                <span>Simple, sencillo y útil.</span>
             </header>
 
             <form onSubmit={addTasks} className='new-task'>
