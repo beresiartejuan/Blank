@@ -1,4 +1,4 @@
-import { useReducer, useRef } from 'react'
+import { useReducer, useRef, useEffect } from "react"
 import { v4 as uuid } from "uuid"
 import './App.css'
 
@@ -18,14 +18,14 @@ type ActionTaks = {
     title?: string;
 };
 
-const inital_tasks: Task[] = []
+const inital_tasks: Task[] = JSON.parse(localStorage.getItem("tasks") || "[]")
 
 const reducer = (state: Task[], action: ActionTaks): Task[] => {
 
     const { type, title, task } = action;
 
     if (type === Actions.ADD_TASK && title && title.length > 2) {
-        return [
+        const newState = [
             {
                 id: uuid(),
                 title,
@@ -33,20 +33,29 @@ const reducer = (state: Task[], action: ActionTaks): Task[] => {
             },
             ...state
         ];
+        localStorage.setItem("tasks", JSON.stringify(newState))
+        return newState
     }
 
     if (type === Actions.CHECK_TASK && task) {
 
-        return state.map(
-            (t: Task) => (t.id !== task.id) ? t : {
+        const newState = state.map((t: Task) =>
+            t.id !== task.id
+            ? t
+            : {
                 ...t,
                 checked: !t.checked
             }
         );
+
+    localStorage.setItem("tasks", JSON.stringify(newState))
+    return newState
     }
 
     if (type === Actions.REMOVE_TASK && task) {
-        return state.filter((t: Task) => t.id !== task.id)
+        const newState = state.filter((t: Task) => t.id !== task.id)
+        localStorage.setItem("tasks", JSON.stringify(newState))
+        return newState
     }
 
     return state
@@ -72,10 +81,11 @@ function App() {
         dispatch({
             task, type: Actions.CHECK_TASK
         })
+  }
 
-        const text = document.getElementById(`text-${task.id}`);
-        text?.classList.toggle("completed")
-    }
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks))
+  }, [tasks])
 
     return (
         <main>
